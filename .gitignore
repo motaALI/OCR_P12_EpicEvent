@@ -1,0 +1,17 @@
+bin
+include
+lib
+__pycache__
+
+# Exclude .env file
+.env
+
+# Exclude virtual environment folder
+venv/
+.env
+.venv
+.EpicEventenv
+env/
+venv/
+EpicEventenv/
+ENV/
