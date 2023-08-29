@@ -42,6 +42,11 @@ Django version 4.1.4
     6.4 : Créer un super utilisateur :
 
     `python manage.py createsuperuser`
+
+    
+    6.5 : Insérer les rôles d'utilisateurs dans la base de données :
+
+    `python manage.py populate_roles`
    
       
 7. Faire des migrations pour cerer la base des données: 
