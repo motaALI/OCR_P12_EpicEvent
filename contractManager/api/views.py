@@ -102,16 +102,16 @@ class ContractViewSet(viewsets.ModelViewSet):
     search_fields = ["client", "sales_contact"]
 
     def get_permissions(self):
-        if self.request.user.role == Role.SALES:
+        if self.request.user.role.name == Role.SALES:
             return [IsAuthenticated(), IsSalesUser()]
-        elif self.request.user.role == Role.SUPPORT:
+        elif self.request.user.role.name == Role.SUPPORT:
             return [IsAuthenticated(), IsSupportUser()]
         else:
             return [IsAdminUser()]
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if self.request.user.role == Role.SALES:
+        if self.request.user.role.name == Role.SALES:
             queryset = queryset.filter(client__sales_contact=self.request.user)
         return queryset
 
@@ -133,7 +133,7 @@ class EventViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action in ["update", "partial_update"]:
-            if self.request.user.role == Role.SUPPORT:
+            if self.request.user.role.name == Role.SUPPORT:
                 return [IsAuthenticated(), IsSupportUser()]
             else:
                 return [IsAdminUser()]  # Assuming admin can perform these actions
@@ -143,7 +143,7 @@ class EventViewSet(viewsets.ModelViewSet):
             return super().get_permissions()
 
     def get_queryset(self):
-        if self.request.user.role == Role.SUPPORT:
+        if self.request.user.role.name == Role.SUPPORT:
             return Event.objects.filter(support_associated=self.request.user)
         else:
             return Event.objects.all()
