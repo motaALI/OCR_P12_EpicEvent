@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Role, CustomUser, Client, Contract, Event
+from .models import Client, Contract, CustomUser, Event, Role
 
 # Register your models here.
 

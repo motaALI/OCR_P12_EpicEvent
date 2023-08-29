@@ -1,9 +1,6 @@
 from rest_framework import permissions
-from rest_framework.permissions import BasePermission
-from django.contrib.auth.models import Permission
 
 from contractManager.models import Role
-
 
 
 class IsSalesUser(permissions.BasePermission):
@@ -19,5 +16,4 @@ class IsManagementUser(permissions.BasePermission):
 class IsSupportUser(permissions.BasePermission):
     def has_permission(self, request, view):
         print(f"request.user.role: {request.user.role.name == 'Support'}")
-        return request.user.role.name == 'Support'
-    
+        return request.user.role.name == "Support"

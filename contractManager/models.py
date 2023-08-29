@@ -1,22 +1,24 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 class Role(models.Model):
-    SALES = 'Sales'
-    MANAGEMENT = 'Management'
-    SUPPORT = 'Support'
+    SALES = "Sales"
+    MANAGEMENT = "Management"
+    SUPPORT = "Support"
     # Add script to create roles
     ROLE_CHOICES = [
-        (SALES, 'Sales'),
-        (MANAGEMENT, 'Management'),
-        (SUPPORT, 'Support'),
+        (SALES, "Sales"),
+        (MANAGEMENT, "Management"),
+        (SUPPORT, "Support"),
     ]
 
     name = models.CharField(max_length=255, choices=ROLE_CHOICES)
 
     def __str__(self):
-        return self.get_name_display()  # This will return the display value for the selected choice (e.g., 'Sales', 'Management', 'Support')
+        return (
+            self.get_name_display()
+        )  # This will return the display value for the selected choice (e.g., 'Sales', 'Management', 'Support')
 
 
 class CustomUser(AbstractUser):
@@ -24,6 +26,7 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
 
 class Client(models.Model):
     full_name = models.CharField(max_length=255)
@@ -39,7 +42,7 @@ class Client(models.Model):
     class Meta:
         verbose_name = "Client"
         verbose_name_plural = "Clients"
-        
+
     def __str__(self):
         return f"client: {self.full_name} - company: {self.company_name}"
 
@@ -57,7 +60,7 @@ class Contract(models.Model):
     class Meta:
         verbose_name = "Contract"
         verbose_name_plural = "Contracts"
-        
+
     def __str__(self):
         return f"Contract: '{self.is_signed}' for 'client: {self.client}'"
 
@@ -83,6 +86,6 @@ class Event(models.Model):
     class Meta:
         verbose_name = "Event"
         verbose_name_plural = "Events"
-        
+
     def __str__(self):
         return f"Event: {self.event_id} Contract: '{self.contract}' for 'client: {self.client_name}'"

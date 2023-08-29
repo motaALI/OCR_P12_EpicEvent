@@ -1,0 +1,18 @@
+[flake8]
+max-line-length = 119
+ignore = E203, E266, E501, W503
+
+exclude=
+    .gitignore,
+    .git,
+    tests.py,
+    contractManager\views.py,
+    epic_event\settings.py,
+    epic_event\urls.py,
+    contractManager\api\serializers.py,
+    db.sqlite3,
+    __pycache__,
+    env/,
+    EpicEventenv/,
+    README.md,
+    requirements.txt,

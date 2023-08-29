@@ -1,14 +1,14 @@
-from django.contrib.auth.models import User
-from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
-from rest_framework.serializers import SerializerMethodField
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from contractManager.models import Role, CustomUser, Client, Contract, Event
+
+from contractManager.models import Client, Contract, CustomUser, Event, Role
+
 
 CustomUser = get_user_model()
+
 
 class TokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -18,7 +18,8 @@ class TokenObtainPairSerializer(TokenObtainPairSerializer):
         # Add custom claims
         token["username"] = user.username
         return token
-    
+
+
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True, validators=[UniqueValidator(queryset=CustomUser.objects.all())]
@@ -63,32 +64,33 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
-    
+
+
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
-        fields = '__all__'
+        fields = "__all__"
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'email', 'role']
+        fields = ["id", "username", "email", "role"]
 
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ContractSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contract
-        fields = '__all__'
+        fields = "__all__"
 
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = '__all__'
+        fields = "__all__"
