@@ -144,6 +144,6 @@ class EventViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if self.request.user.role.name == Role.SUPPORT:
-            return Event.objects.filter(support_associated=self.request.user)
+            return Event.objects.filter(support_contact=self.request.user)
         else:
             return Event.objects.all()
